@@ -1,0 +1,102 @@
+﻿<local:CachedPage
+    xmlns:local="using:BreadPlayer.SettingsViews"
+    x:Class="BreadPlayer.SettingsViews.CoreSettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer>
+        <StackPanel x:Name="mainPanel" DataContext="{Binding Source={StaticResource Core}, Path=Instance.SettingsVm.CoreSettingsVM}" RequestedTheme="{Binding Source={StaticResource TextBrush}, Converter={StaticResource BrushToTheme}}">
+            <TextBlock
+                x:Name="resetHeader"
+                x:Uid="resetHeader"
+                FontSize="22"
+                FontWeight="Bold"
+                Text="" />
+            <Button
+                x:Uid="resetEverythingBtn"
+                Grid.Column="0"
+                Height="28"
+                Margin="0,0,10,0"
+                Padding="0"
+                HorizontalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
+                Background="{x:Null}"
+                Command="{Binding ResetCommand}"
+                Content=""
+                FontSize="16"
+                Style="{StaticResource HyperlinkBtn}" />
+            <TextBlock
+                x:Uid="resetEverythingHelpText"
+                Margin="0,-4,0,0"
+                FontSize="11"
+                Text=""
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                x:Uid="notificationsHeader"
+                Margin="0,10,0,0"
+                FontSize="22"
+                FontWeight="Bold"
+                Text="" />
+            <CheckBox x:Uid="songNotificationsCheckBox"
+                      IsChecked="{Binding Path=UpcomingSongNotificationsEnabled}"
+                      Content="" />
+            <CheckBox x:Uid="tileNotificationsCheckBox" Content="" 
+                      IsChecked="{Binding Path=TileNotificationsEnabled}"/>
+
+            <!--  Lockscreen Section  -->
+            <TextBlock
+                x:Uid="lockscreenHeader"
+                Margin="0,10,0,0"
+                FontSize="22"
+                FontWeight="Bold"
+                Text="" />
+            <CheckBox
+                x:Uid="preventScreenLockingCheckBox"
+                Margin="0,10,0,0"
+                Content=""
+                IsChecked="{Binding Path=PreventScreenFromLocking, Mode=TwoWay}" />
+            <TextBlock
+                FontSize="11"
+                TextWrapping="Wrap">
+                <Run x:Uid="preventScreenLockingInfoText" Text="" />
+                <LineBreak />
+                <Run x:Uid="preventScreenLockingFurtherInfoText" FontWeight="Bold" />
+            </TextBlock>
+            <CheckBox
+                x:Uid="replaceLockscreenCheckBox"
+                Margin="0,0,0,0"
+                Content=""
+                IsChecked="{Binding Path=ReplaceLockscreenWithAlbumArt, Mode=TwoWay}" />
+            <TextBlock
+                FontSize="11"
+                TextWrapping="Wrap">
+                <Run x:Uid="replaceLockscreenInfoText" Text="" />
+                <LineBreak />
+                <Run x:Uid="replaceLockscreenFurtherInfoText" FontWeight="Bold" />
+            </TextBlock>
+        </StackPanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="mainPanel.Margin" Value="10,0,20,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </ScrollViewer>
+</local:CachedPage>
